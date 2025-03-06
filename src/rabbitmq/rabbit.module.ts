@@ -19,6 +19,6 @@ import { RabbitMQService } from './rabbit.service';
     ]),
   ],
   providers: [RabbitMQService],
-  exports: [ClientsModule, RabbitMQService], // Exporta ClientsModule para que otros módulos lo puedan usar
+  exports: [ClientsModule, RabbitMQService],
 })
 export class RabbitMQModule {}

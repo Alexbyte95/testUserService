@@ -6,10 +6,12 @@ import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class UserMapper {
-  constructor(@InjectModel(User.name) private readonly userModel: Model<User>) {}
+  constructor(
+    @InjectModel(User.name) private readonly userModel: Model<User>,
+  ) {}
 
   toEntity(createUserDto: CreateUserRequest): User {
-    const user = new this.userModel(createUserDto); // Usamos el modelo de Mongoose
+    const user = new this.userModel(createUserDto);
     return user;
   }
 

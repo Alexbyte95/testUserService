@@ -84,14 +84,13 @@ export class UserService implements OnModuleInit {
 
   sendNotification(user: any) {
     try {
-      console.log(user);
       this.notificationService
         .sendNotification({
           name: user.name,
           email: user.email,
         })
         .subscribe((res) => {
-          console.log(res);
+          this.logger.info(res);
         });
       this.logger.info('Notification sent successfully.');
     } catch (error) {
