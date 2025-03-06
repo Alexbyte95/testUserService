@@ -83,19 +83,23 @@ export class UserService implements OnModuleInit {
   }
 
   sendNotification(user: any) {
-    try {
-      this.notificationService
-        .sendNotification({
-          name: user.name,
-          email: user.email,
-        })
-        .subscribe((res) => {
+    this.notificationService
+      .sendNotification({
+        name: user.name,
+        email: user.email,
+      })
+      .subscribe({
+        next: (res) => {
           this.logger.info(res);
-        });
-      this.logger.info('Notification sent successfully.');
-    } catch (error) {
-      this.logger.error('Error sending notification:', error);
-      throw new InternalServerErrorException('Error sending notification.');
-    }
+          this.logger.info('Notification sent successfully.');
+        },
+        error: (error) => {
+          this.logger.error('Error sending notification:', error);
+          throw new InternalServerErrorException('Error sending notification.');
+        },
+        complete: () => {
+          this.logger.info('Notification process completed.');
+        },
+      });
   }
 }
